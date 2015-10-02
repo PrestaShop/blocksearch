@@ -33,7 +33,7 @@ class BlockSearch extends Module
 	{
 		$this->name = 'blocksearch';
 		$this->tab = 'search_filter';
-		$this->version = '1.6.0';
+		$this->version = '1.7.0';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -46,7 +46,7 @@ class BlockSearch extends Module
 
 	public function install()
 	{
-		if (!parent::install() || !$this->registerHook('top') || !$this->registerHook('header') || !$this->registerHook('displayMobileTopSiteMap'))
+		if (!parent::install() || !$this->registerHook('top') || !$this->registerHook('header') || !$this->registerHook('displayMobileTopSiteMap') || !$this->registerHook('displaySearch'))
 			return false;
 		return true;
 	}
@@ -124,6 +124,11 @@ public function hookDisplayMobileHeader($params)
 	{
 		return $this->hookTop($params);
 	}
+
+	public function hookDisplaySearch($params)
+    {
+        return $this->hookRightColumn($params);
+    }
 
 	private function calculHookCommon($params)
 	{
